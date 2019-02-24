@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     public bool grounded;
 
     private bool jumping;
+    private bool facingRight = true;
 
     private Rigidbody2D rb2d;
     private Animator anim;
@@ -40,16 +41,29 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        float move = 0f;
+        move = Input.GetAxis("Horizontal");
+
+        rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
+
+        if ( (move < 0 && facingRight) || (move > 0 && !facingRight) ) {
+            Flip();
+        }
+
         if (jumping)
         {
             rb2d.AddForce(new Vector2(0f, jumpForce));
             jumping = false;
-        }   
+        }
     }
 
     void PlayAnimations()
     {
-        if (grounded && rb2d.velocity.x == 0)
+        if (grounded && rb2d.velocity.x != 0)
+        {
+            anim.Play("Run");
+        }
+        else if (grounded && rb2d.velocity.x == 0)
         {
             anim.Play("Idle");
         }
@@ -57,5 +71,11 @@ public class Player : MonoBehaviour
         {
             anim.Play("Jump");
         }
+    }
+
+    void Flip()
+    {
+        facingRight = !facingRight;
+        transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 }

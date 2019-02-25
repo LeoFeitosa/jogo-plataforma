@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     public float speed;
     public int jumpForce;
-
     public Transform groundCheck;
     public LayerMask layerGround;
     public float radiusCheck;
@@ -14,7 +13,6 @@ public class Player : MonoBehaviour
 
     private bool jumping;
     private bool facingRight = true;
-
     private Rigidbody2D rb2d;
     private Animator anim;
 

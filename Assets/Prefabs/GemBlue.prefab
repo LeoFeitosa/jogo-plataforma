@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2453729065886074258}
   - component: {fileID: 2453729065886074260}
   - component: {fileID: 2453729065886074261}
+  - component: {fileID: 6179219773072080922}
   m_Layer: 0
   m_Name: GemBlue
   m_TagString: Untagged
@@ -134,3 +135,15 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   inverted: 1
+--- !u!114 &6179219773072080922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2453729065886074257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a875ae3d86d6644faa781c42fa9694d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

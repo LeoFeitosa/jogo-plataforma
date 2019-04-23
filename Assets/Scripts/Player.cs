@@ -9,10 +9,12 @@ public class Player : MonoBehaviour
     public Transform groundCheck;
     public LayerMask layerGround;
     public float radiusCheck;
-    public bool grounded;
 
+    public bool grounded;
     private bool jumping;
     private bool facingRight = true;
+    private bool isAlive = true;
+
     private Rigidbody2D rb2d;
     private Animator anim;
 
@@ -39,25 +41,35 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float move = 0f;
-        move = Input.GetAxis("Horizontal");
-
-        rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
-
-        if ( (move < 0 && facingRight) || (move > 0 && !facingRight) ) {
-            Flip();
-        }
-
-        if (jumping)
+        if (isAlive)
         {
-            rb2d.AddForce(new Vector2(0f, jumpForce));
-            jumping = false;
+            float move = Input.GetAxis("Horizontal");
+
+            rb2d.velocity = new Vector2(move * speed, rb2d.velocity.y);
+
+            if ((move < 0 && facingRight) || (move > 0 && !facingRight))
+            {
+                Flip();
+            }
+
+            if (jumping)
+            {
+                rb2d.AddForce(new Vector2(0f, jumpForce));
+                jumping = false;
+            }
+        } else
+        {
+            rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
     }
 
     void PlayAnimations()
     {
-        if (grounded && rb2d.velocity.x != 0)
+        if (!isAlive)
+        {
+            anim.Play("Die");
+        }
+        else if (grounded && rb2d.velocity.x != 0)
         {
             anim.Play("Run");
         }
@@ -75,5 +87,18 @@ public class Player : MonoBehaviour
     {
         facingRight = !facingRight;
         transform.localScale = new Vector3( -transform.localScale.x, transform.localScale.y, transform.localScale.z);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Enemy")) {
+            PlayerDie();
+        }
+    }
+
+    private void PlayerDie()
+    {
+        isAlive = false;
+        Physics2D.IgnoreLayerCollision(9, 10);
     }
 }

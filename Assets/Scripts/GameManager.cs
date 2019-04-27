@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class GameManagement : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
-    public static GameManagement instance;
+    public static GameManager instance;
     public Sprite[] overlaySprites;
     public Image overlay;
     public Text timeHud;
@@ -51,9 +51,19 @@ public class GameManagement : MonoBehaviour
                 scoreHud.text = "Score: " + score.ToString();
             }
 
+        } else if (status == GameStatus.WIN)
+        {
+            SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
         } else
         {
-            // exibe os overlays
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+
+    public void SetOverlay(GameStatus parStatus)
+    {
+        status = parStatus;
+        overlay.enabled = true;
+        overlay.sprite = overlaySprites[(int)parStatus];
     }
 }

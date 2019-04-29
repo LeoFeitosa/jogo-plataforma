@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private bool facingRight = true;
     private bool isAlive = true;
     private bool levelComplete = false;
+    private bool timeIsOver = false;
 
     private Rigidbody2D rb2d;
     private Animator anim;
@@ -35,6 +36,12 @@ public class Player : MonoBehaviour
         {
             //Comandos do pulo
             jumping = true;
+        }
+
+        if (((int)GameManager.instance.time <= 0) && !timeIsOver)
+        {
+            timeIsOver = true;
+            PlayerDie();
         }
 
         PlayAnimations();
@@ -104,7 +111,7 @@ public class Player : MonoBehaviour
     private void PlayerDie()
     {
         isAlive = false;
-        Physics2D.IgnoreLayerCollision(9, 10);
+        Physics2D.IgnoreLayerCollision(9, 10); // interrompe a colisao
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -113,5 +120,13 @@ public class Player : MonoBehaviour
         {
             levelComplete = true;
         }
+    }
+
+    void DieAnimationFinished()
+    {
+        if (timeIsOver)
+            GameManager.instance.SetOverlay(GameManager.GameStatus.LOSE);
+        else
+            GameManager.instance.SetOverlay(GameManager.GameStatus.DIE);
     }
 }

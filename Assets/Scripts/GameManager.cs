@@ -35,28 +35,32 @@ public class GameManager : MonoBehaviour
         time = 30f;
         score = 0;
         status = GameStatus.PLAY;
+        overlay.enabled = false;
+        Physics2D.IgnoreLayerCollision(9, 10, false); // volta a colisao
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(status == GameStatus.PLAY)
+        if (status == GameStatus.PLAY)
         {
             time -= Time.deltaTime;
             int timeInt = (int)time;
 
-            if(timeInt >= 0)
+            if (timeInt >= 0)
             {
                 timeHud.text = "Time: " + timeInt.ToString();
                 scoreHud.text = "Score: " + score.ToString();
             }
 
-        } else if (status == GameStatus.WIN)
-        {
-            SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex + 1 );
-        } else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        } else if (Input.GetButtonDown("Jump")) {
+            if (status == GameStatus.WIN)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            } else
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            }
         }
     }
 

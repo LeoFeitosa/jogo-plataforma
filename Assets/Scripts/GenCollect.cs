@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GenCollect : MonoBehaviour
 {
+    public AudioClip fxCollect;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player")) {
             GameManager.instance.score++;
+            SoundManager.instance.PlayFxGemCollect(fxCollect);
             Destroy(gameObject);
         }
     }

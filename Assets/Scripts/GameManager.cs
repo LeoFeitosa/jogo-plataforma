@@ -56,7 +56,10 @@ public class GameManager : MonoBehaviour
         } else if (Input.GetButtonDown("Jump")) {
             if (status == GameStatus.WIN)
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                if(SceneManager.GetActiveScene().buildIndex == 0)
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                else
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             } else
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -20,6 +20,10 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator anim;
 
+    public AudioClip fxWin;
+    public AudioClip fxDie;
+    public AudioClip fxJump;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,6 +40,8 @@ public class Player : MonoBehaviour
         {
             //Comandos do pulo
             jumping = true;
+            if(isAlive && !levelComplete)
+                SoundManager.instance.PlayFxPlayer(fxJump);
         }
 
         if (((int)GameManager.instance.time <= 0) && !timeIsOver)
@@ -112,6 +118,7 @@ public class Player : MonoBehaviour
     {
         isAlive = false;
         Physics2D.IgnoreLayerCollision(9, 10); // interrompe a colisao
+        SoundManager.instance.PlayFxPlayer(fxDie);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -119,6 +126,7 @@ public class Player : MonoBehaviour
         if (other.CompareTag("Exit"))
         {
             levelComplete = true;
+            SoundManager.instance.PlayFxPlayer(fxWin);
         }
     }
 

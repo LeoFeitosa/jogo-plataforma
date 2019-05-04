@@ -14094,6 +14094,21 @@ PrefabInstance:
       propertyPath: jumpForce
       value: 635
       objectReference: {fileID: 0}
+    - target: {fileID: 8532691370760659628, guid: af2a9252b1363e949b3571fd3a57c816,
+        type: 3}
+      propertyPath: fxWin
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c494f34568dd274797c696e8cc59146, type: 3}
+    - target: {fileID: 8532691370760659628, guid: af2a9252b1363e949b3571fd3a57c816,
+        type: 3}
+      propertyPath: fxDie
+      value: 
+      objectReference: {fileID: 8300000, guid: 719961ad9cf1d4344a834702968925a3, type: 3}
+    - target: {fileID: 8532691370760659628, guid: af2a9252b1363e949b3571fd3a57c816,
+        type: 3}
+      propertyPath: fxJump
+      value: 
+      objectReference: {fileID: 8300000, guid: c616cbbd3b6fdc241997d7d6c3de1c42, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: af2a9252b1363e949b3571fd3a57c816, type: 3}
 --- !u!1001 &8733993412191221911
